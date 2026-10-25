@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rashi & Vanshaj | Wedding Invitation</title>
+
+<style>
+:root {
+  --wine: #6e1f32;
+  --gold: #c8a45d;
+  --cream: #fff9ef;
+  --ink: #39252a;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Georgia, "Times New Roman", serif;
+}
+header {
+  padding: 18px;
+  text-align: center;
+  background: var(--cream);
+  border-bottom: 1px solid #eadcc8;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+header a {
+  color: var(--wine);
+  margin: 0 10px;
+  text-decoration: none;
+}
+.hero {
+  min-height: 85vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 40px 18px;
+  background: radial-gradient(ellipse, #fffdf7, #f0dfc5);
+}
+.hero h1 {
+  font-size: clamp(48px, 9vw, 90px);
+  font-weight: normal;
+  color: var(--wine);
+  margin: 20px 0;
+}
+.hero p {
+  max-width: 600px;
+  line-height: 1.8;
+  margin: 20px auto;
+}
+.gold { color: var(--gold); }
+.section {
+  max-width: 1100px;
+  padding: 65px 20px;
+  margin: auto;
+}
+.heading {
+  text-align: center;
+  margin-bottom: 35px;
+}
+h2 {
+  font-size: clamp(30px, 5vw, 44px);
+  color: var(--wine);
+  font-weight: normal;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.card {
+  text-align: center;
+  padding: 25px 18px;
+  background: #fffdf8;
+  border: 1px solid #eadcc8;
+  border-radius: 16px;
+}
+.card h3 {
+  font-size: 23px;
+  font-weight: normal;
+  color: var(--wine);
+}
+.card p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.date { color: #9a793a; }
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 30px;
+  padding: 12px 20px;
+  background: var(--wine);
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  margin: 5px;
+}
+.btn.gold-btn {
+  background: var(--gold);
+  color: #351e22;
+}
+.families {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.venue {
+  background: var(--wine);
+  color: white;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+}
+.venue h3 { font-size: 28px; font-weight: normal; }
+.venue p { line-height: 1.8; }
+footer {
+  padding: 35px 20px;
+  text-align: center;
+  color: white;
+  background: #4b1725;
+}
+footer h2 { color: #e4c98a; }
+
+@media (max-width: 760px) {
+  .grid { grid-template-columns: 1fr; }
+  .families { grid-template-columns: 1fr; }
+  header a { margin: 5px; font-size: 13px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <strong style="color:#6e1f32">RASHI ♥ VANSHAJ</strong>
+  <p>
+    <a href="#families">Families</a>
+    <a href="#events">Celebrations</a>
+    <a href="#venue">Venue</a>
+  </p>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="gold">॥ श्री गणेशाय नमः ॥</p>
+    <p>TOGETHER WITH OUR FAMILIES</p>
+
+    <h1>
+      Rashi<br>
+      <span class="gold">&</span><br>
+      Vanshaj
+    </h1>
+
+    <p>
+      With the blessings of our families, we invite you
+      to join us as we begin our beautiful journey together.
+    </p>
+
+    <p class="gold">29 NOVEMBER – 05 DECEMBER 2026</p>
+
+    <a class="btn" href="#events">Explore Celebrations ↓</a>
+  </div>
+</section>
+
+<section class="section" id="families">
+  <div class="heading">
+    <p class="gold">TWO FAMILIES, ONE CELEBRATION</p>
+    <h2>With Love & Blessings</h2>
+  </div>
+
+  <div class="families">
+    <div class="card">
+      <h3>Rashi Setia</h3>
+      <p class="gold">Bride's Family</p>
+      <p>
+        Daughter of Seema Setia & Dalip Setia<br>
+        Granddaughter of Late Smt. Lajwanti Setia<br>
+        and Late Shri Roshan Lal Setia
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Vanshaj Batra</h3>
+      <p class="gold">Groom's Family</p>
+      <p>Son of Anju Batra & Sunil Batra</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="events">
+  <div class="heading">
+    <p class="gold">SAVE THE DATES</p>
+    <h2>Wedding Festivities</h2>
+    <p>Every moment is more beautiful when shared with loved ones.</p>
+  </div>
+
+  <div class="grid">
+
+    <article class="card">
+      <div class="gold">❀</div>
+      <h3>Path Sukhmani Sahib / Kirtan</h3>
+      <p class="date">29 November 2026</p>
+      <p><strong>9:30 AM onwards</strong></p>
+      <p>H. No. 750, Sector 7,<br>Urban Estate, Gurugram</p>
+      <p>Begin the celebrations with prayers and blessings.</p>
+    </article>
+
+    <article class="card">
+      <div class="gold">✦</div>
+      <h3>Engagement / Sagan</h3>
+      <p class="date">30 November 2026</p>
+      <p><strong>6:30 PM onwards</strong></p>
+      <p>The Jewels Pearl Banquet,<br>Sector 5, Gurugram</p>
+      <p>Celebrate the beginning of our forever.</p>
+    </article>
+
+    <article class="card">
+      <div class="gold">♥</div>
+      <h3>Haldi</h3>
+      <p class="date">03 December 2026</p>
+      <p><strong>11:00 AM onwards</strong></p>
+      <p>Gumber Farms,<br>Gurugram</p>
+      <p>A joyful celebration filled with colour and blessings.</p>
+    </article>
+
+    <article class="card">
+      <div class="gold">❧</div>
+      <h3>Mehendi / DJ Night</h3>
+      <p class="date">03 December 2026</p>
+      <p><strong>8:00 PM onwards</strong></p>
+      <p>H. No. 750, Sector 7 Extension,<br>Urban Estate, Gurugram</p>
+      <p>An evening of music, dance and celebration.</p>
+    </article>
+
+    <article class="card">
+      <div class="gold">✧</div>
+      <h3>Reception of Baraat</h3>
+      <p class="date">04 December 2026</p>
+      <p><strong>9:00 PM onwards</strong></p>
+      <p>Arambh The Grand Convention,<br>Old Delhi Road, Gurugram</p>
+      <p>Join us for the grand celebration.</p>
+      <a class="btn gold-btn"
+         href="https://maps.app.goo.gl/R9rL2H73HfaHj3d87"
+         target="_blank" rel="noopener">
+        Get Directions ↗
+      </a>
+    </article>
+
+    <article class="card">
+      <div class="gold">❀</div>
+      <h3>Vidaai</h3>
+      <p class="date">05 December 2026</p>
+      <p><strong>5:00 AM</strong></p>
+      <p>Arambh The Grand Convention,<br>Old Delhi Road, Gurugram</p>
+      <p>With love, blessings and heartfelt wishes.</p>
+      <a class="btn gold-btn"
+         href="https://maps.app.goo.gl/R9rL2H73HfaHj3d87"
+         target="_blank" rel="noopener">
+        Get Directions ↗
+      </a>
+    </article>
+
+  </div>
+</section>
+
+<section class="section" id="venue">
+  <div class="heading">
+    <p class="gold">WE LOOK FORWARD TO WELCOMING YOU</p>
+    <h2>Venue & Directions</h2>
+  </div>
+
+  <div class="venue">
+    <h3>Arambh The Grand Convention</h3>
+    <p>Old Delhi Road, Gurugram, Haryana</p>
+    <a class="btn gold-btn"
+       href="https://maps.app.goo.gl/R9rL2H73HfaHj3d87"
+       target="_blank" rel="noopener">
+      Open Google Maps ↗
+    </a>
+  </div>
+
+  <div class="heading" style="margin-top:35px">
+    <p>For other functions, venue details are listed on their respective cards.</p>
+    <button class="btn" onclick="shareInvite()">Share Invitation ↗</button>
+  </div>
+</section>
+
+<footer>
+  <h2>Rashi & Vanshaj</h2>
+  <p>Made with love and blessings.</p>
+  <p>॥ शुभ विवाह ॥</p>
+</footer>
+
+<script>
+function shareInvite() {
+  const message =
+    "You're invited to celebrate the wedding of Rashi Setia & Vanshaj Batra! " +
+    "29 November to 05 December 2026. " +
+    "Reception of Baraat: 04 December, 9 PM onwards. " +
+    "Arambh The Grand Convention, Old Delhi Road, Gurugram. " +
+    window.location.href;
+
+  window.open(
+    "https://wa.me/?text=" + encodeURIComponent(message),
+    "_blank"
+  );
+}
+</script>
+
+</body>
+</html>
