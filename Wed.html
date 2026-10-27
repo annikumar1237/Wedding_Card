@@ -220,6 +220,20 @@ footer h2{color:#ffe09a;font-weight:normal}
   .event-image{height:235px}
   header a{margin:5px;font-size:12px}
 }
+#musicDialog {
+  width:min(430px,calc(100% - 32px));
+  padding:32px 22px;
+  border:2px solid var(--gold);
+  border-radius:24px;
+  background:var(--cream);
+  color:var(--ink);
+  text-align:center;
+  box-shadow:0 15px 60px #0004;
+}
+#musicDialog::backdrop {background:rgba(51,12,37,.78)}
+#musicDialog h2 {color:var(--wine);font-weight:normal;font-size:32px}
+#musicDialog p {line-height:1.7}
+#musicDialog button:disabled {opacity:.65;cursor:wait}
 </style>
 </head>
 
@@ -552,6 +566,16 @@ footer h2{color:#ffe09a;font-weight:normal}
   </div>
 </section>
 
+<!-- Music starts after the visitor allows it when autoplay is blocked. -->
+<dialog id="musicDialog" aria-labelledby="musicTitle" aria-describedby="musicStatus">
+  <div class="ornament">❀ ✦ ❀</div>
+  <h2 id="musicTitle">Rashi &amp; Vanshaj</h2>
+  <p>Welcome to our wedding invitation</p>
+  <p id="musicStatus" role="status">Enjoy our invitation with music.</p>
+  <button type="button" class="btn gold-btn" id="allowMusic">🎵 Allow Music</button>
+  <button type="button" class="btn" id="skipMusic">Continue Without Music</button>
+</dialog>
+
 <!-- MUSIC CONTROL -->
 <button class="floating-music"
   onclick="toggleMusic()"
@@ -560,44 +584,80 @@ footer h2{color:#ffe09a;font-weight:normal}
 </button>
 
 <script>
-const weddingMusic = new Audio("https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/wedding-theme.mp3");
+// Use the music file uploaded alongside Wed.html.
+const weddingMusic = new Audio("./kirtan.mp3");
 weddingMusic.loop = true;
+weddingMusic.preload = "auto";
 weddingMusic.volume = 0.35;
+const musicButton = document.getElementById("musicButton");
+const musicDialog = document.getElementById("musicDialog");
+const musicStatus = document.getElementById("musicStatus");
+const allowMusic = document.getElementById("allowMusic");
+const eventPlayers = [...document.querySelectorAll(".event-audio")];
 
-// Try to start the wedding theme as soon as the page opens.
-// Browsers may block autoplay with sound until the visitor interacts.
-window.addEventListener("load", async () => {
-  const button = document.getElementById("musicButton");
-  try {
-    await weddingMusic.play();
-    button.textContent = "⏸ Pause Music";
-  } catch (error) {
-    button.textContent = "🎵 Tap to Play Music";
-  }
+function updateMusicButton() {
+  musicButton.textContent = weddingMusic.paused ? "🎵 Play Music" : "⏸ Pause Music";
+  musicButton.setAttribute("aria-pressed", String(!weddingMusic.paused));
+}
+weddingMusic.addEventListener("playing", updateMusicButton);
+weddingMusic.addEventListener("pause", updateMusicButton);
+weddingMusic.addEventListener("error", () => {
+  musicButton.textContent = "🎵 Retry Music";
+  musicStatus.textContent = "Music could not load. Please check your connection and try again.";
 });
 
-async function toggleMusic() {
-  const button = document.getElementById("musicButton");
-
-  if (weddingMusic.paused) {
-    try {
-      await weddingMusic.play();
-      button.textContent = "⏸ Pause Music";
-    } catch (error) {
-      button.textContent = "🎵 Tap to Play Music";
-    }
-  } else {
-    weddingMusic.pause();
-    button.textContent = "🎵 Play Music";
+async function startMusic() {
+  eventPlayers.forEach(player => player.pause());
+  musicButton.textContent = "🎵 Loading Music…";
+  try {
+    // Call play directly in the click handler, before any await.
+    await weddingMusic.play();
+    updateMusicButton();
+    if (musicDialog.open) musicDialog.close();
+    return true;
+  } catch (error) {
+    musicButton.textContent = "🎵 Tap to Play Music";
+    musicButton.setAttribute("aria-pressed", "false");
+    musicStatus.textContent = error.name === "NotAllowedError"
+      ? "Tap Allow Music to enjoy the invitation with music."
+      : "Music could not load. Please check your connection and try again.";
+    return false;
   }
 }
 
-document.querySelectorAll(".event-audio").forEach(player => {
+async function toggleMusic() {
+  if (weddingMusic.paused) {
+    await startMusic();
+  } else {
+    weddingMusic.pause();
+  }
+}
+
+allowMusic.addEventListener("click", async () => {
+  allowMusic.disabled = true;
+  musicStatus.textContent = "Starting music…";
+  await startMusic();
+  allowMusic.disabled = false;
+});
+document.getElementById("skipMusic").addEventListener("click", () => {
+  weddingMusic.pause();
+  musicDialog.close();
+});
+musicDialog.addEventListener("close", () => musicButton.focus());
+
+window.addEventListener("load", async () => {
+  // Autoplay where permitted; otherwise offer an explicit play action.
+  if (!(await startMusic())) {
+    musicDialog.showModal();
+    allowMusic.focus();
+  }
+});
+
+eventPlayers.forEach(player => {
   player.addEventListener("play", () => {
     weddingMusic.pause();
-    document.getElementById("musicButton").textContent = "🎵 Play Music";
-
-    document.querySelectorAll(".event-audio").forEach(other => {
+    updateMusicButton();
+    eventPlayers.forEach(other => {
       if (other !== player) other.pause();
     });
   });
