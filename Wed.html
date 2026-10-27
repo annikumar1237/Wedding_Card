@@ -234,6 +234,54 @@ footer h2{color:#ffe09a;font-weight:normal}
 #musicDialog h2 {color:var(--wine);font-weight:normal;font-size:32px}
 #musicDialog p {line-height:1.7}
 #musicDialog button:disabled {opacity:.65;cursor:wait}
+
+/* A focused celebration story with one selected event and one shared player. */
+body {padding-bottom:100px}
+#events {scroll-margin-top:110px}
+.event-intro {text-align:center;line-height:1.7;color:#77546a;margin:-12px 0 26px}
+.event-tabs {display:flex;gap:10px;overflow:auto;padding:6px 3px 16px;scrollbar-width:thin}
+.event-tabs button {flex:1 0 auto;border:1px solid #e8cda2;border-radius:999px;padding:12px 18px;background:#fffaf2;color:var(--wine);font:inherit;cursor:pointer;white-space:nowrap}
+.event-tabs button[aria-selected="true"] {background:var(--wine);color:#fff6df;border-color:var(--wine);box-shadow:0 5px 16px #741b4720}
+.event-tabs button:focus-visible,.btn:focus-visible {outline:3px solid #b18432;outline-offset:4px}
+.event-grid {display:block}
+#eventStage {scroll-margin-top:110px}
+.event-card[hidden] {display:none!important}
+#events .event-card {display:grid;grid-template-columns:1fr 1fr;text-align:left;min-height:500px;border-radius:26px;transition:none}
+#events .event-card:hover {transform:none}
+#events .event-image {height:100%;min-height:500px}
+#events .event-content {padding:36px}
+#events .event-card h3 {font-size:34px;line-height:1.2;min-height:0;margin:18px 0}
+#events .event-card p {font-size:16px}
+.event-navigation {display:flex;align-items:center;justify-content:space-between;margin:16px 0}
+.event-navigation p {letter-spacing:3px;color:#a56a1e;font-size:14px}
+.event-navigation button:disabled {opacity:.4;cursor:default}
+.event-soundtrack {background:#fffaf2;border:1px solid #eddbbd;border-radius:22px;padding:24px}
+.soundtrack-heading {display:flex;align-items:center;justify-content:space-between;gap:16px}
+.soundtrack-heading h3 {font-size:24px;font-weight:normal;color:var(--wine);margin:8px 0}
+.soundtrack-heading p {margin:5px 0}
+#eventPlaybackStatus {font-size:14px;line-height:1.6;color:#77546a}
+#youtubeShell {max-width:640px;margin:20px auto 0;text-align:center}
+#youtubeShell iframe {display:block;width:100%;height:auto;aspect-ratio:16/9;min-height:200px;border:0;border-radius:14px}
+#youtubeShell a {display:inline-block;color:var(--wine);font-size:13px;margin-top:12px}
+.music-dock {display:flex;align-items:center;gap:18px;padding:10px 12px 10px 20px;max-width:calc(100% - 30px)}
+.music-dock-label {display:flex;flex-direction:column;gap:5px;min-width:0;max-width:240px}
+.music-dock-label small {font:10px Arial,sans-serif;letter-spacing:1.8px;color:#ffe09a}
+.music-dock-label span {white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
+.music-dock .btn {white-space:nowrap;margin:0}
+@media(max-width:650px) {
+  #events .event-card {grid-template-columns:1fr;min-height:0}
+  #events .event-image {height:260px;min-height:0}
+  #events .event-content {padding:25px 22px}
+  #events .event-card h3 {font-size:29px}
+  .event-tabs button {padding:10px 15px;font-size:14px}
+  .event-soundtrack {padding:20px 16px}
+  .soundtrack-heading {align-items:flex-start;flex-direction:column;gap:8px}
+  .music-dock {left:12px;right:12px;bottom:12px;width:calc(100% - 24px);max-width:none;justify-content:space-between;gap:10px;padding-left:16px}
+  .music-dock-label {max-width:180px}
+  .music-dock .btn {font-size:12px;padding:11px 12px}
+}
+@media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
+
 </style>
 </head>
 
@@ -309,10 +357,20 @@ footer h2{color:#ffe09a;font-weight:normal}
     <p>Six beautiful moments, one unforgettable celebration. ✨</p>
   </div>
 
-  <div class="grid">
+  <p class="event-intro">Six celebrations. Six moods. Choose a moment and let the music follow.</p>
+  <div class="event-tabs" role="tablist" aria-label="Wedding celebrations">
+    <button type="button" role="tab" id="tab-kirtan" aria-controls="event-kirtan" aria-selected="true" tabindex="0" data-event="0">🙏 Kirtan</button>
+    <button type="button" role="tab" id="tab-engagement" aria-controls="event-engagement" aria-selected="false" tabindex="-1" data-event="1">💍 Sagan</button>
+    <button type="button" role="tab" id="tab-haldi" aria-controls="event-haldi" aria-selected="false" tabindex="-1" data-event="2">🌼 Haldi</button>
+    <button type="button" role="tab" id="tab-mehendi" aria-controls="event-mehendi" aria-selected="false" tabindex="-1" data-event="3">💚 Mehendi / DJ</button>
+    <button type="button" role="tab" id="tab-reception" aria-controls="event-reception" aria-selected="false" tabindex="-1" data-event="4">👑 Baraat</button>
+    <button type="button" role="tab" id="tab-vidaai" aria-controls="event-vidaai" aria-selected="false" tabindex="-1" data-event="5">🌹 Vidaai</button>
+  </div>
+  <div id="eventStage">
+  <div class="event-grid">
 
     <!-- KIRTAN -->
-    <article class="card event-card">
+    <article class="card event-card" id="event-kirtan" role="tabpanel" aria-labelledby="tab-kirtan">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/kirtan.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Wedding celebration">
@@ -325,17 +383,12 @@ footer h2{color:#ffe09a;font-weight:normal}
         <p>H. No. 750, Sector 7,<br>Urban Estate, Gurugram</p>
         <a class="btn gold-btn" href="https://maps.app.goo.gl/P1aX28CAqXJHwRJw6" target="_blank" rel="noopener">📍 Get Kirtan Directions ↗</a>
         <p>Begin the celebrations with prayers and divine blessings.</p>
-        <div class="music-box">
-          <p>🎵 Devotional Music</p>
-          <audio controls preload="none" class="event-audio">
-            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/kirtan.mp3" type="audio/mpeg">
-          </audio>
-        </div>
+
       </div>
     </article>
 
     <!-- ENGAGEMENT -->
-    <article class="card event-card">
+    <article class="card event-card" id="event-engagement" role="tabpanel" aria-labelledby="tab-engagement">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/engagement.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Romantic wedding celebration">
@@ -352,17 +405,12 @@ footer h2{color:#ffe09a;font-weight:normal}
           target="_blank" rel="noopener">
           📍 Get Directions ↗
         </a>
-        <div class="music-box">
-          <p>🎵 Romantic Music</p>
-          <audio controls preload="none" class="event-audio">
-            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/engagement.mp3" type="audio/mpeg">
-          </audio>
-        </div>
+
       </div>
     </article>
 
     <!-- HALDI -->
-    <article class="card event-card">
+    <article class="card event-card" id="event-haldi" role="tabpanel" aria-labelledby="tab-haldi">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/haldi.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Colourful wedding decorations">
@@ -379,17 +427,12 @@ footer h2{color:#ffe09a;font-weight:normal}
           target="_blank" rel="noopener">
           📍 Get Directions ↗
         </a>
-        <div class="music-box">
-          <p>🎵 Haldi Celebration Music</p>
-          <audio controls preload="none" class="event-audio">
-            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/haldi.mp3" type="audio/mpeg">
-          </audio>
-        </div>
+
       </div>
     </article>
 
     <!-- MEHENDI -->
-    <article class="card event-card">
+    <article class="card event-card" id="event-mehendi" role="tabpanel" aria-labelledby="tab-mehendi">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/mehendi.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Wedding festivities">
@@ -402,17 +445,12 @@ footer h2{color:#ffe09a;font-weight:normal}
         <p>H. No. 750, Sector 7 Extension,<br>Urban Estate, Gurugram</p>
         <a class="btn gold-btn" href="https://maps.app.goo.gl/P1aX28CAqXJHwRJw6" target="_blank" rel="noopener">📍 Get Mehendi Directions ↗</a>
         <p>Mehendi, music, dance and a night full of memories.</p>
-        <div class="music-box">
-          <p>🎵 Mehendi / DJ Music</p>
-          <audio controls preload="none" class="event-audio">
-            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/mehendi.mp3" type="audio/mpeg">
-          </audio>
-        </div>
+
       </div>
     </article>
 
     <!-- RECEPTION -->
-    <article class="card event-card">
+    <article class="card event-card" id="event-reception" role="tabpanel" aria-labelledby="tab-reception">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/reception.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Elegant wedding reception">
@@ -429,17 +467,12 @@ footer h2{color:#ffe09a;font-weight:normal}
           target="_blank" rel="noopener">
           📍 Get Directions ↗
         </a>
-        <div class="music-box">
-          <p>🎵 Grand Entry Music</p>
-          <audio controls preload="none" class="event-audio">
-            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/reception.mp3" type="audio/mpeg">
-          </audio>
-        </div>
+
       </div>
     </article>
 
     <!-- VIDAAI -->
-    <article class="card event-card">
+    <article class="card event-card" id="event-vidaai" role="tabpanel" aria-labelledby="tab-vidaai">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/vidaai.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Wedding flowers and celebration">
@@ -456,15 +489,30 @@ footer h2{color:#ffe09a;font-weight:normal}
           target="_blank" rel="noopener">
           📍 Get Directions ↗
         </a>
-        <div class="music-box">
-          <p>🎵 Emotional Farewell Music</p>
-          <audio controls preload="none" class="event-audio">
-            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/vidaai.mp3" type="audio/mpeg">
-          </audio>
-        </div>
+
       </div>
     </article>
 
+  </div>
+  <div class="event-navigation">
+    <button type="button" class="btn" id="previousEvent" aria-label="Previous event">← Previous</button>
+    <p id="eventCounter" aria-live="polite">01 / 06</p>
+    <button type="button" class="btn gold-btn" id="nextEvent" aria-label="Next event">Next →</button>
+  </div>
+  <div class="event-soundtrack">
+    <div class="soundtrack-heading">
+      <div><p class="eyebrow">The sound of this celebration</p>
+      <h3 id="eventSongTitle">Your uploaded Kirtan</h3>
+      <p id="eventSongArtist">Prayer &amp; blessings</p></div>
+      <button type="button" class="btn" id="eventPlayButton">🎵 Play event music</button>
+    </div>
+    <p id="eventPlaybackStatus" role="status">Allow music to hear each celebration's soundtrack.</p>
+    <div id="youtubeShell" hidden>
+      <div id="youtubePlayer"></div>
+      <a id="youtubeLink" href="https://www.youtube.com/" target="_blank" rel="noopener">Listen on YouTube ↗</a>
+    </div>
+    <p class="note">Music follows your selected event. Outside the celebrations, our Kirtan welcomes you back.</p>
+  </div>
   </div>
 </section>
 
@@ -577,90 +625,284 @@ footer h2{color:#ffe09a;font-weight:normal}
 </dialog>
 
 <!-- MUSIC CONTROL -->
-<button class="floating-music"
-  onclick="toggleMusic()"
-  id="musicButton">
-  🎵 Play Music
-</button>
+<div class="floating-music music-dock">
+  <div class="music-dock-label"><small id="nowPlayingLabel">WELCOME MUSIC</small><span id="nowPlayingTitle">Your uploaded Kirtan</span></div>
+  <button type="button" class="btn gold-btn" onclick="toggleMusic()" id="musicButton" aria-pressed="false">🎵 Play Music</button>
+</div>
 
 <script>
-// Use the music file uploaded alongside Wed.html.
+// One audio element and one visible YouTube player; never mix two songs.
+const celebrationTracks = [
+  {name:"Kirtan", title:"Your uploaded Kirtan", artist:"Prayer & blessings", src:"./kirtan.mp3"},
+  {name:"Engagement / Sagan", title:"Din Shagna Da", artist:"Jasleen Royal · T-Series", video:"AWlGgIq-r5c"},
+  {name:"Haldi", title:"Sona Vatna Main Na", artist:"Tripat Laur Dhillon & Chorus · Music Today", video:"nkU9OWYXtVM"},
+  {name:"Mehendi / DJ Night", title:"Mehndi Ni Mehndi", artist:"Harshdeep Kaur", video:"ZbtJbV-SF74"},
+  {name:"Reception of Baraat", title:"Aaya Ladiye", artist:"Ginni Mahi · Loyal Music", video:"e3A2AML2q4A"},
+  {name:"Vidaai", title:"Madhaniya", artist:"Neha Bhasin", video:"UFYSJ5arOyE"}
+];
 const weddingMusic = new Audio("./kirtan.mp3");
 weddingMusic.loop = true;
-weddingMusic.preload = "auto";
+weddingMusic.preload = "metadata";
 weddingMusic.volume = 0.35;
 const musicButton = document.getElementById("musicButton");
 const musicDialog = document.getElementById("musicDialog");
 const musicStatus = document.getElementById("musicStatus");
-const allowMusic = document.getElementById("allowMusic");
-const eventPlayers = [...document.querySelectorAll(".event-audio")];
+const eventStatus = document.getElementById("eventPlaybackStatus");
+const stage = document.getElementById("eventStage");
+const tabs = [...document.querySelectorAll("[data-event]")];
+const panels = [...document.querySelectorAll(".event-card")];
+const youtubeShell = document.getElementById("youtubeShell");
+let selectedEvent = 0;
+let inEvents = false;
+let enabled = false;
+let requestVersion = 0;
+let activeMode = "local";
+let playbackState = "paused";
+let youtubePlayer = null;
+let youtubeReady = false;
+let youtubeLoading = false;
+let loadedVideo = "";
+let youtubeTimer = null;
+let fallbackActive = false;
 
-function updateMusicButton() {
-  musicButton.textContent = weddingMusic.paused ? "🎵 Play Music" : "⏸ Pause Music";
-  musicButton.setAttribute("aria-pressed", String(!weddingMusic.paused));
+function selectedTrack() {
+  return inEvents ? celebrationTracks[selectedEvent] : celebrationTracks[0];
 }
-weddingMusic.addEventListener("playing", updateMusicButton);
-weddingMusic.addEventListener("pause", updateMusicButton);
-weddingMusic.addEventListener("error", () => {
-  musicButton.textContent = "🎵 Retry Music";
-  musicStatus.textContent = "Music could not load. Please check your connection and try again.";
-});
-
-async function startMusic() {
-  eventPlayers.forEach(player => player.pause());
-  musicButton.textContent = "🎵 Loading Music…";
+function setStatus(state, message) {
+  playbackState = state;
+  musicButton.textContent = state === "playing" ? "⏸ Pause" :
+    state === "loading" ? "⏸ Pause" : "🎵 Play Music";
+  musicButton.setAttribute("aria-pressed", String(enabled && (state === "playing" || state === "loading")));
+  document.getElementById("eventPlayButton").textContent = enabled ? "⏸ Pause music" : "🎵 Play event music";
+  if (message) eventStatus.textContent = message;
+  document.getElementById("nowPlayingLabel").textContent = !enabled ? "MUSIC PAUSED" :
+    fallbackActive ? "WELCOME MUSIC" : inEvents ? selectedTrack().name.toUpperCase() : "WELCOME MUSIC";
+  document.getElementById("nowPlayingTitle").textContent = fallbackActive ? celebrationTracks[0].title : selectedTrack().title;
+}
+function pausePlayers() {
+  weddingMusic.pause();
+  if (youtubeReady) youtubePlayer.pauseVideo();
+}
+function pauseMusic() {
+  enabled = false;
+  requestVersion++;
+  pausePlayers();
+  setStatus("paused", "Music paused. Choose Play whenever you are ready.");
+}
+async function playLocal(version, fallback) {
+  activeMode = "local";
+  fallbackActive = fallback;
+  if (youtubeReady) youtubePlayer.pauseVideo();
   try {
-    // Call play directly in the click handler, before any await.
+    // This call stays synchronous with an Allow/Play click.
     await weddingMusic.play();
-    updateMusicButton();
-    if (musicDialog.open) musicDialog.close();
+    if (version !== requestVersion || !enabled || document.hidden) {
+      if (activeMode !== "local" || !enabled || document.hidden) weddingMusic.pause();
+      return false;
+    }
+    setStatus("playing", fallback
+      ? "This event's YouTube track is unavailable. Your uploaded Kirtan is playing instead."
+      : "Playing your uploaded Kirtan.");
     return true;
   } catch (error) {
-    musicButton.textContent = "🎵 Tap to Play Music";
-    musicButton.setAttribute("aria-pressed", "false");
-    musicStatus.textContent = error.name === "NotAllowedError"
-      ? "Tap Allow Music to enjoy the invitation with music."
-      : "Music could not load. Please check your connection and try again.";
+    if (version !== requestVersion) return false;
+    enabled = false;
+    setStatus("blocked", error.name === "NotAllowedError"
+      ? "Tap Play Music to start the soundtrack."
+      : "Music could not load. Check your connection and tap Play to retry.");
+    musicStatus.textContent = eventStatus.textContent;
     return false;
   }
 }
-
-async function toggleMusic() {
-  if (weddingMusic.paused) {
-    await startMusic();
+function fallbackToKirtan() {
+  if (!enabled || !inEvents || activeMode !== "youtube") return;
+  playLocal(requestVersion, true);
+}
+function playYoutubeTrack() {
+  if (!enabled || !inEvents || document.hidden || !selectedTrack().video) return;
+  activeMode = "youtube";
+  fallbackActive = false;
+  weddingMusic.pause();
+  youtubeShell.hidden = false;
+  if (!youtubeReady) {
+    setStatus("loading", "Loading event music from YouTube…");
+    loadYoutube();
+    return;
+  }
+  const video = selectedTrack().video;
+  setStatus("loading", "Starting " + selectedTrack().title + "…");
+  youtubePlayer.unMute();
+  youtubePlayer.setVolume(40);
+  if (loadedVideo !== video) {
+    loadedVideo = video;
+    youtubePlayer.loadVideoById(video);
   } else {
-    weddingMusic.pause();
+    youtubePlayer.playVideo();
   }
 }
-
-allowMusic.addEventListener("click", async () => {
-  allowMusic.disabled = true;
-  musicStatus.textContent = "Starting music…";
-  await startMusic();
-  allowMusic.disabled = false;
+function loadYoutube() {
+  if (youtubeLoading) return;
+  youtubeLoading = true;
+  const script = document.createElement("script");
+  script.src = "https://www.youtube.com/iframe_api";
+  script.onerror = () => {
+    youtubeLoading = false;
+    clearTimeout(youtubeTimer);
+    fallbackToKirtan();
+  };
+  document.head.appendChild(script);
+  youtubeTimer = setTimeout(() => {
+    if (!youtubeReady) {
+      youtubeLoading = false;
+      fallbackToKirtan();
+    }
+  }, 12000);
+}
+window.onYouTubeIframeAPIReady = function() {
+  if (youtubePlayer) return;
+  youtubePlayer = new YT.Player("youtubePlayer", {
+    width:640, height:360,
+    host:"https://www.youtube.com",
+    playerVars:{playsinline:1, controls:1, rel:0, origin:window.location.origin},
+    events:{
+      onReady: () => {
+        youtubeReady = true;
+        clearTimeout(youtubeTimer);
+        youtubePlayer.getIframe().setAttribute("title", "Punjabi wedding celebration music");
+        youtubePlayer.getIframe().setAttribute("allow", "autoplay; encrypted-media; picture-in-picture; fullscreen");
+        if (enabled && inEvents && selectedTrack().video && !document.hidden) playYoutubeTrack();
+      },
+      onStateChange: event => {
+        if (event.data === 1) {
+          // Ignore a late Play event after leaving a section, pausing, or changing song.
+          const videoId = youtubePlayer.getVideoData().video_id;
+          if (!inEvents || document.hidden || activeMode !== "youtube" ||
+              videoId !== selectedTrack().video ||
+              (!enabled && playbackState !== "blocked" && playbackState !== "nativePaused")) {
+            youtubePlayer.pauseVideo();
+            return;
+          }
+          enabled = true;
+          weddingMusic.pause();
+          setStatus("playing", "Playing " + selectedTrack().title + " · " + selectedTrack().artist);
+        } else if (event.data === 2 && activeMode === "youtube" && enabled &&
+                   !document.hidden && inEvents && playbackState === "playing") {
+          // Honour Pause in YouTube's own controls as well as our buttons.
+          enabled = false;
+          requestVersion++;
+          setStatus("nativePaused", "Music paused. Tap Play to continue.");
+        } else if (event.data === 0 && enabled && inEvents && activeMode === "youtube") {
+          youtubePlayer.seekTo(0, true);
+          youtubePlayer.playVideo();
+        }
+      },
+      onAutoplayBlocked: () => {
+        if (activeMode !== "youtube" || !enabled) return;
+        enabled = false;
+        setStatus("blocked", "Tap Play event music or the YouTube play button to start this song.");
+      },
+      onError: () => fallbackToKirtan()
+    }
+  });
+};
+async function startMusic() {
+  enabled = true;
+  fallbackActive = false;
+  const version = ++requestVersion;
+  const track = selectedTrack();
+  document.getElementById("youtubeLink").href = track.video ? "https://www.youtube.com/watch?v=" + track.video : "https://www.youtube.com/";
+  if (track.video) {
+    playYoutubeTrack();
+    return true;
+  }
+  youtubeShell.hidden = true;
+  setStatus("loading", "Starting music…");
+  return playLocal(version, false);
+}
+function toggleMusic() {
+  if (enabled) pauseMusic();
+  else startMusic();
+}
+function refreshSelectedEvent() {
+  tabs.forEach((tab, index) => {
+    tab.setAttribute("aria-selected", String(index === selectedEvent));
+    tab.tabIndex = index === selectedEvent ? 0 : -1;
+    panels[index].hidden = index !== selectedEvent;
+  });
+  const track = celebrationTracks[selectedEvent];
+  document.getElementById("eventSongTitle").textContent = track.title;
+  document.getElementById("eventSongArtist").textContent = track.artist;
+  document.getElementById("eventCounter").textContent = String(selectedEvent + 1).padStart(2, "0") + " / 06";
+  document.getElementById("previousEvent").disabled = selectedEvent === 0;
+  document.getElementById("nextEvent").disabled = selectedEvent === celebrationTracks.length - 1;
+  youtubeShell.hidden = !track.video;
+  document.getElementById("youtubeLink").href = track.video ? "https://www.youtube.com/watch?v=" + track.video : "https://www.youtube.com/";
+}
+function chooseEvent(index, focusTab) {
+  if (index < 0 || index >= celebrationTracks.length) return;
+  const changed = index !== selectedEvent || !inEvents;
+  selectedEvent = index;
+  inEvents = true;
+  refreshSelectedEvent();
+  if (focusTab) tabs[index].focus();
+  // Selecting an event also makes its soundtrack the active one.
+  if (enabled && changed) startMusic();
+  else setStatus(playbackState, enabled ? undefined : "Music is paused. Tap Play event music to listen.");
+  stage.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth", block:"start"});
+}
+tabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => chooseEvent(index, false));
+  tab.addEventListener("keydown", event => {
+    let next = index;
+    if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+    else if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
+    else if (event.key === "Home") next = 0;
+    else if (event.key === "End") next = tabs.length - 1;
+    else return;
+    event.preventDefault();
+    chooseEvent(next, true);
+  });
 });
-document.getElementById("skipMusic").addEventListener("click", () => {
-  weddingMusic.pause();
+document.getElementById("previousEvent").addEventListener("click", () => chooseEvent(selectedEvent - 1, true));
+document.getElementById("nextEvent").addEventListener("click", () => chooseEvent(selectedEvent + 1, true));
+document.getElementById("eventPlayButton").addEventListener("click", () => {
+  inEvents = true;
+  toggleMusic();
+});
+document.getElementById("allowMusic").addEventListener("click", () => {
+  // Start from this user gesture; do not await any network call first.
+  startMusic();
   musicDialog.close();
 });
+document.getElementById("skipMusic").addEventListener("click", () => {
+  pauseMusic();
+  musicDialog.close();
+});
+musicDialog.addEventListener("cancel", () => pauseMusic());
 musicDialog.addEventListener("close", () => musicButton.focus());
-
-window.addEventListener("load", async () => {
-  // Autoplay where permitted; otherwise offer an explicit play action.
-  if (!(await startMusic())) {
-    musicDialog.showModal();
-    allowMusic.focus();
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    requestVersion++;
+    pausePlayers();
+  } else if (enabled) {
+    startMusic();
   }
 });
-
-eventPlayers.forEach(player => {
-  player.addEventListener("play", () => {
-    weddingMusic.pause();
-    updateMusicButton();
-    eventPlayers.forEach(other => {
-      if (other !== player) other.pause();
-    });
-  });
+if ("IntersectionObserver" in window) {
+  new IntersectionObserver(entries => {
+    const visible = entries[0].isIntersecting;
+    if (visible === inEvents) return;
+    inEvents = visible;
+    if (enabled) startMusic();
+    else setStatus("paused");
+  }, {rootMargin:"-110px 0px -15% 0px", threshold:0}).observe(stage);
+}
+refreshSelectedEvent();
+setStatus("paused");
+// Attempt the original welcome music. A visitor's choice to skip/pause persists
+// through all event navigation until they explicitly press Play again.
+startMusic().then(ok => {
+  if (!ok && !enabled && !musicDialog.open) musicDialog.showModal();
 });
 
 function shareInvite() {
