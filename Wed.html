@@ -104,6 +104,17 @@ header a{
   border-radius:22px;
   box-shadow:0 10px 28px rgba(100,35,68,.09);
 }
+.person-image{
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:50%;
+  border:4px solid #e2bd67;
+  box-shadow:0 6px 20px rgba(100,35,68,.16);
+  display:block;
+  margin:0 auto 16px;
+  background:#fff0f6;
+}
 .card h3{
   font-size:24px;
   font-weight:normal;
@@ -252,7 +263,10 @@ footer h2{color:#ffe09a;font-weight:normal}
 
   <div class="families">
     <div class="card">
-      <div class="event-icon">🌸</div>
+      <img class="person-image"
+        src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/bride.jpg"
+        alt="Bride Rashi Setia"
+        onerror="this.style.display='none'">
       <h3>Rashi Setia</h3>
       <p class="gold">Bride's Family</p>
       <p>
@@ -262,7 +276,10 @@ footer h2{color:#ffe09a;font-weight:normal}
       </p>
     </div>
     <div class="card">
-      <div class="event-icon">🌹</div>
+      <img class="person-image"
+        src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/groom.jpg"
+        alt="Groom Vanshaj Batra"
+        onerror="this.style.display='none'">
       <h3>Vanshaj Batra</h3>
       <p class="gold">Groom's Family</p>
       <p>Son of Anju Batra & Sunil Batra</p>
@@ -292,6 +309,7 @@ footer h2{color:#ffe09a;font-weight:normal}
         <p class="date">22 November 2026</p>
         <p><strong>9:30 AM onwards</strong></p>
         <p>H. No. 750, Sector 7,<br>Urban Estate, Gurugram</p>
+        <a class="btn gold-btn" href="https://maps.app.goo.gl/P1aX28CAqXJHwRJw6" target="_blank" rel="noopener">📍 Get Kirtan Directions ↗</a>
         <p>Begin the celebrations with prayers and divine blessings.</p>
         <div class="music-box">
           <p>🎵 Devotional Music</p>
@@ -576,7 +594,7 @@ function shareInvite() {
   const message =
     "💖 You're invited to celebrate the wedding of Rashi Setia & Vanshaj Batra! 💖\n\n" +
 
-    "🙏 Path Sukhmani Sahib / Kirtan\n22 November 2026 | 9:30 AM onwards\nH. No. 750, Sector 7, Urban Estate, Gurugram\n\n" +
+    "🙏 Path Sukhmani Sahib / Kirtan\n22 November 2026 | 9:30 AM onwards\nH. No. 750, Sector 7, Urban Estate, Gurugram\nLocation: https://maps.app.goo.gl/P1aX28CAqXJHwRJw6\n\n" +
 
     "💍 Engagement / Sagan\n30 November 2026 | 6:30 PM onwards\nThe Jewels Pearl Banquet, Sector 5, Gurugram\nLocation: https://maps.app.goo.gl/BETsoTKRALSdGY5s6\n\n" +
 
