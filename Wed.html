@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,130 +8,228 @@
 
 <style>
 :root {
-  --wine: #6e1f32;
-  --gold: #c8a45d;
-  --cream: #fff9ef;
-  --ink: #39252a;
+  --wine:#741b47;
+  --gold:#d9ad46;
+  --pink:#ffe1ec;
+  --cream:#fff9f1;
+  --ink:#392238;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
 body {
-  margin: 0;
-  background: var(--cream);
-  color: var(--ink);
-  font-family: Georgia, "Times New Roman", serif;
+  margin:0;
+  color:var(--ink);
+  font-family:Georgia,"Times New Roman",serif;
+  background:linear-gradient(135deg,#fff8ee,#fff0f6,#f5efff);
 }
 header {
-  padding: 18px;
-  text-align: center;
-  background: var(--cream);
-  border-bottom: 1px solid #eadcc8;
-  position: sticky;
-  top: 0;
-  z-index: 5;
+  padding:14px 10px;
+  text-align:center;
+  background:rgba(255,255,255,.96);
+  border-bottom:2px solid #f0d5b0;
+  position:sticky;
+  top:0;
+  z-index:10;
 }
+header strong {color:var(--wine);font-size:20px}
 header a {
-  color: var(--wine);
-  margin: 0 10px;
-  text-decoration: none;
+  display:inline-block;
+  color:var(--wine);
+  margin:8px 10px 0;
+  text-decoration:none;
+  font-size:14px;
 }
+header a:hover {color:#d46a91}
+
 .hero {
-  min-height: 85vh;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  padding: 40px 18px;
-  background: radial-gradient(ellipse, #fffdf7, #f0dfc5);
+  min-height:88vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:50px 18px;
+  background:
+    linear-gradient(135deg,rgba(71,13,49,.78),rgba(120,34,83,.56)),
+    url("https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1800&q=85")
+    center/cover;
+  color:white;
+  position:relative;
+}
+.hero-inner {
+  width:min(800px,100%);
+  padding:35px 20px;
+  border:1px solid rgba(255,220,151,.8);
+  border-radius:24px;
+  background:rgba(51,12,37,.30);
+  backdrop-filter:blur(3px);
 }
 .hero h1 {
-  font-size: clamp(48px, 9vw, 90px);
-  font-weight: normal;
-  color: var(--wine);
-  margin: 20px 0;
+  font-size:clamp(48px,10vw,92px);
+  font-weight:normal;
+  line-height:1.02;
+  margin:22px 0;
+  text-shadow:0 4px 20px #351126;
 }
-.hero p {
-  max-width: 600px;
-  line-height: 1.8;
-  margin: 20px auto;
+.hero p {line-height:1.8}
+.gold {color:#ffe09a}
+.ornament {font-size:30px;color:#ffdf91;letter-spacing:8px}
+.date-banner {
+  display:inline-block;
+  padding:12px 20px;
+  margin:14px 0;
+  border:1px solid #ffe09a;
+  border-radius:30px;
+  color:#fff2c9;
+  font-size:clamp(15px,3vw,21px);
+  letter-spacing:1px;
 }
-.gold { color: var(--gold); }
 .section {
-  max-width: 1100px;
-  padding: 65px 20px;
-  margin: auto;
+  max-width:1150px;
+  padding:65px 20px;
+  margin:auto;
 }
-.heading {
-  text-align: center;
-  margin-bottom: 35px;
+.heading {text-align:center;margin-bottom:35px}
+.heading h2 {
+  font-size:clamp(30px,5vw,45px);
+  color:var(--wine);
+  font-weight:normal;
+  margin:12px 0;
 }
-h2 {
-  font-size: clamp(30px, 5vw, 44px);
-  color: var(--wine);
-  font-weight: normal;
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 18px;
-}
-.card {
-  text-align: center;
-  padding: 25px 18px;
-  background: #fffdf8;
-  border: 1px solid #eadcc8;
-  border-radius: 16px;
-}
-.card h3 {
-  font-size: 23px;
-  font-weight: normal;
-  color: var(--wine);
-}
-.card p {
-  font-size: 14px;
-  line-height: 1.7;
-}
-.date { color: #9a793a; }
-.btn {
-  display: inline-block;
-  border: none;
-  border-radius: 30px;
-  padding: 12px 20px;
-  background: var(--wine);
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-  margin: 5px;
-}
-.btn.gold-btn {
-  background: var(--gold);
-  color: #351e22;
+.heading p {line-height:1.7}
+.eyebrow {
+  color:#ae7732;
+  letter-spacing:2px;
+  font-size:13px;
+  text-transform:uppercase;
 }
 .families {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:24px;
 }
+.card {
+  text-align:center;
+  padding:26px 20px;
+  background:rgba(255,255,255,.92);
+  border:1px solid #f0d7b9;
+  border-radius:22px;
+  box-shadow:0 10px 28px rgba(100,35,68,.09);
+}
+.card h3 {
+  font-size:24px;
+  font-weight:normal;
+  color:var(--wine);
+  margin:14px 0;
+}
+.card p {font-size:14px;line-height:1.8}
+.card .date {font-weight:bold;color:#a56a1e;font-size:16px}
+.event-card {
+  padding:0;
+  overflow:hidden;
+  transition:transform .25s,box-shadow .25s;
+}
+.event-card:hover {
+  transform:translateY(-6px);
+  box-shadow:0 16px 32px rgba(100,35,68,.17);
+}
+.event-image {
+  width:100%;
+  height:215px;
+  object-fit:cover;
+  display:block;
+}
+.event-content {padding:20px 18px 25px}
+.event-icon {font-size:30px}
+.event-card h3 {min-height:55px}
+.event-card .btn {margin-top:8px}
+.event-tag {
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:20px;
+  background:#fff0d0;
+  color:#7c4c17;
+  font-size:12px;
+}
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:22px;
+}
+.btn {
+  display:inline-block;
+  border:0;
+  border-radius:28px;
+  padding:12px 20px;
+  background:linear-gradient(135deg,#8a2457,#531436);
+  color:white;
+  text-decoration:none;
+  cursor:pointer;
+  font-family:inherit;
+  font-size:14px;
+  margin:5px;
+  box-shadow:0 5px 14px rgba(90,20,56,.15);
+}
+.btn:hover {filter:brightness(1.12)}
+.gold-btn {
+  background:linear-gradient(135deg,#ffe4a0,#d5a33b);
+  color:#432331;
+}
+.music-box {
+  margin-top:15px;
+  padding:12px;
+  border-radius:14px;
+  background:#fff5f9;
+  border:1px solid #f3d9e5;
+}
+.music-box p {margin:3px 0 9px}
+.music-box audio {width:100%;height:36px}
 .venue {
-  background: var(--wine);
-  color: white;
-  padding: 30px;
-  border-radius: 16px;
-  text-align: center;
+  background:linear-gradient(135deg,#65163e,#9b3e70,#572047);
+  color:white;
+  padding:36px 20px;
+  border:2px solid #e9c67c;
+  border-radius:24px;
+  text-align:center;
+  box-shadow:0 12px 30px #6e1f321c;
 }
-.venue h3 { font-size: 28px; font-weight: normal; }
-.venue p { line-height: 1.8; }
+.venue h3 {font-size:30px;font-weight:normal}
+.venue p {line-height:1.8}
 footer {
-  padding: 35px 20px;
-  text-align: center;
-  color: white;
-  background: #4b1725;
+  padding:38px 20px;
+  text-align:center;
+  color:white;
+  background:linear-gradient(135deg,#431126,#791c4c);
+  border-top:3px solid var(--gold);
 }
-footer h2 { color: #e4c98a; }
+footer h2 {color:#ffe09a;font-weight:normal}
+.floating-music {
+  position:fixed;
+  bottom:18px;
+  right:15px;
+  z-index:20;
+  border-radius:30px;
+  background:#781d4c;
+  color:white;
+  padding:12px 17px;
+  border:1px solid #f3d38a;
+  cursor:pointer;
+  box-shadow:0 5px 20px #0002;
+}
+.note {
+  font-size:12px;
+  color:#77546a;
+  line-height:1.6;
+}
 
-@media (max-width: 760px) {
-  .grid { grid-template-columns: 1fr; }
-  .families { grid-template-columns: 1fr; }
-  header a { margin: 5px; font-size: 13px; }
+@media(max-width:850px) {
+  .grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px) {
+  .grid,.families {grid-template-columns:1fr}
+  .section {padding:45px 15px}
+  .hero {min-height:78vh}
+  .hero-inner {padding:28px 12px}
+  .event-image {height:235px}
+  header a {margin:7px 6px;font-size:12px}
 }
 </style>
 </head>
@@ -138,16 +237,17 @@ footer h2 { color: #e4c98a; }
 <body>
 
 <header>
-  <strong style="color:#6e1f32">RASHI ♥ VANSHAJ</strong>
-  <p>
+  <strong>💖 RASHI ♥ VANSHAJ 💖</strong>
+  <nav>
     <a href="#families">Families</a>
     <a href="#events">Celebrations</a>
     <a href="#venue">Venue</a>
-  </p>
+  </nav>
 </header>
 
 <section class="hero">
-  <div>
+  <div class="hero-inner">
+    <div class="ornament">❀ ✦ ❀</div>
     <p class="gold">॥ श्री गणेशाय नमः ॥</p>
     <p>TOGETHER WITH OUR FAMILIES</p>
 
@@ -158,24 +258,31 @@ footer h2 { color: #e4c98a; }
     </h1>
 
     <p>
+      Two hearts, two families, one beautiful journey.
       With the blessings of our families, we invite you
-      to join us as we begin our beautiful journey together.
+      to celebrate our love and togetherness.
     </p>
 
-    <p class="gold">29 NOVEMBER – 05 DECEMBER 2026</p>
+    <div class="date-banner">
+      22 NOVEMBER – 05 DECEMBER 2026
+    </div>
 
-    <a class="btn" href="#events">Explore Celebrations ↓</a>
+    <p class="gold">A CELEBRATION OF LOVE, TRADITION & HAPPINESS</p>
+
+    <a class="btn gold-btn" href="#events">Explore Celebrations ↓</a>
+    <button class="btn" onclick="shareInvite()">Share on WhatsApp ↗</button>
   </div>
 </section>
 
 <section class="section" id="families">
   <div class="heading">
-    <p class="gold">TWO FAMILIES, ONE CELEBRATION</p>
+    <p class="eyebrow">Two Families, One Celebration</p>
     <h2>With Love & Blessings</h2>
   </div>
 
   <div class="families">
     <div class="card">
+      <div class="event-icon">🌸</div>
       <h3>Rashi Setia</h3>
       <p class="gold">Bride's Family</p>
       <p>
@@ -186,6 +293,7 @@ footer h2 { color: #e4c98a; }
     </div>
 
     <div class="card">
+      <div class="event-icon">🌹</div>
       <h3>Vanshaj Batra</h3>
       <p class="gold">Groom's Family</p>
       <p>Son of Anju Batra & Sunil Batra</p>
@@ -195,120 +303,259 @@ footer h2 { color: #e4c98a; }
 
 <section class="section" id="events">
   <div class="heading">
-    <p class="gold">SAVE THE DATES</p>
+    <p class="eyebrow">Save the Dates</p>
     <h2>Wedding Festivities</h2>
-    <p>Every moment is more beautiful when shared with loved ones.</p>
+    <p>Six beautiful moments, one unforgettable celebration. ✨</p>
   </div>
 
   <div class="grid">
 
-    <article class="card">
-      <div class="gold">❀</div>
-      <h3>Path Sukhmani Sahib / Kirtan</h3>
-      <p class="date">29 November 2026</p>
-      <p><strong>9:30 AM onwards</strong></p>
-      <p>H. No. 750, Sector 7,<br>Urban Estate, Gurugram</p>
-      <p>Begin the celebrations with prayers and blessings.</p>
+    <!-- 1. KIRTAN -->
+    <article class="card event-card">
+      <img class="event-image"
+        src="https://images.unsplash.com/photo-1604608672516-8d5c5a6e4f1c?auto=format&fit=crop&w=900&q=80"
+        alt="Peaceful devotional setting"
+        onerror="this.style.display='none'">
+
+      <div class="event-content">
+        <div class="event-icon">🙏</div>
+        <span class="event-tag">Prayer & Blessings</span>
+        <h3>Path Sukhmani Sahib / Kirtan</h3>
+        <p class="date">22 November 2026</p>
+        <p><strong>9:30 AM onwards</strong></p>
+        <p>H. No. 750, Sector 7,<br>Urban Estate, Gurugram</p>
+        <p>Begin the celebrations with prayers, peace and divine blessings.</p>
+
+        <div class="music-box">
+          <p>🎵 Devotional Music</p>
+          <audio controls preload="none">
+            <source src="songs/kirtan.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
     </article>
 
-    <article class="card">
-      <div class="gold">✦</div>
-      <h3>Engagement / Sagan</h3>
-      <p class="date">30 November 2026</p>
-      <p><strong>6:30 PM onwards</strong></p>
-      <p>The Jewels Pearl Banquet,<br>Sector 5, Gurugram</p>
-      <p>Celebrate the beginning of our forever.</p>
+    <!-- 2. ENGAGEMENT -->
+    <article class="card event-card">
+      <img class="event-image"
+        src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80"
+        alt="Romantic wedding celebration">
+
+      <div class="event-content">
+        <div class="event-icon">💍</div>
+        <span class="event-tag">A Promise Forever</span>
+        <h3>Engagement / Sagan</h3>
+        <p class="date">30 November 2026</p>
+        <p><strong>6:30 PM onwards</strong></p>
+        <p>The Jewels Pearl Banquet,<br>Sector 5, Gurugram</p>
+        <p>Two hearts come together to begin their forever.</p>
+
+        <div class="music-box">
+          <p>🎵 Romantic Music</p>
+          <audio controls preload="none">
+            <source src="songs/engagement.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
     </article>
 
-    <article class="card">
-      <div class="gold">♥</div>
-      <h3>Haldi</h3>
-      <p class="date">03 December 2026</p>
-      <p><strong>11:00 AM onwards</strong></p>
-      <p>Gumber Farms,<br>Gurugram</p>
-      <p>A joyful celebration filled with colour and blessings.</p>
+    <!-- 3. HALDI -->
+    <article class="card event-card">
+      <img class="event-image"
+        src="https://images.unsplash.com/photo-1519225421980-888cb4a1b0c0?auto=format&fit=crop&w=900&q=80"
+        alt="Colourful wedding decor">
+
+      <div class="event-content">
+        <div class="event-icon">🌼</div>
+        <span class="event-tag">Yellow & Sunshine</span>
+        <h3>Haldi</h3>
+        <p class="date">03 December 2026</p>
+        <p><strong>11:00 AM onwards</strong></p>
+        <p>Gumber Farms,<br>Gurugram</p>
+        <p>A joyful day of yellow hues, laughter and family blessings.</p>
+
+        <div class="music-box">
+          <p>🎵 Haldi Celebration Music</p>
+          <audio controls preload="none">
+            <source src="songs/haldi.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
     </article>
 
-    <article class="card">
-      <div class="gold">❧</div>
-      <h3>Mehendi / DJ Night</h3>
-      <p class="date">03 December 2026</p>
-      <p><strong>8:00 PM onwards</strong></p>
-      <p>H. No. 750, Sector 7 Extension,<br>Urban Estate, Gurugram</p>
-      <p>An evening of music, dance and celebration.</p>
+    <!-- 4. MEHENDI -->
+    <article class="card event-card">
+      <img class="event-image"
+        src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80"
+        alt="Wedding festivities">
+
+      <div class="event-content">
+        <div class="event-icon">💚</div>
+        <span class="event-tag">Music, Dance & Masti</span>
+        <h3>Mehendi / DJ Night</h3>
+        <p class="date">03 December 2026</p>
+        <p><strong>8:00 PM onwards</strong></p>
+        <p>H. No. 750, Sector 7 Extension,<br>Urban Estate, Gurugram</p>
+        <p>Mehendi, music, dance and a night full of memories.</p>
+
+        <div class="music-box">
+          <p>🎵 Mehendi / DJ Music</p>
+          <audio controls preload="none">
+            <source src="songs/mehendi.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
     </article>
 
-    <article class="card">
-      <div class="gold">✧</div>
-      <h3>Reception of Baraat</h3>
-      <p class="date">04 December 2026</p>
-      <p><strong>9:00 PM onwards</strong></p>
-      <p>Arambh The Grand Convention,<br>Old Delhi Road, Gurugram</p>
-      <p>Join us for the grand celebration.</p>
-      <a class="btn gold-btn"
-         href="https://maps.app.goo.gl/R9rL2H73HfaHj3d87"
-         target="_blank" rel="noopener">
-        Get Directions ↗
-      </a>
+    <!-- 5. RECEPTION -->
+    <article class="card event-card">
+      <img class="event-image"
+        src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=900&q=80"
+        alt="Elegant wedding reception decor">
+
+      <div class="event-content">
+        <div class="event-icon">👑</div>
+        <span class="event-tag">Royal Celebration</span>
+        <h3>Reception of Baraat</h3>
+        <p class="date">04 December 2026</p>
+        <p><strong>9:00 PM onwards</strong></p>
+        <p>Arambh The Grand Convention,<br>Old Delhi Road, Gurugram</p>
+        <p>Join us for an elegant evening of celebration and togetherness.</p>
+
+        <a class="btn gold-btn"
+          href="https://maps.app.goo.gl/R9rL2H73HfaHj3d87"
+          target="_blank" rel="noopener">Get Directions ↗</a>
+
+        <div class="music-box">
+          <p>🎵 Grand Entry Music</p>
+          <audio controls preload="none">
+            <source src="songs/reception.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
     </article>
 
-    <article class="card">
-      <div class="gold">❀</div>
-      <h3>Vidaai</h3>
-      <p class="date">05 December 2026</p>
-      <p><strong>5:00 AM</strong></p>
-      <p>Arambh The Grand Convention,<br>Old Delhi Road, Gurugram</p>
-      <p>With love, blessings and heartfelt wishes.</p>
-      <a class="btn gold-btn"
-         href="https://maps.app.goo.gl/R9rL2H73HfaHj3d87"
-         target="_blank" rel="noopener">
-        Get Directions ↗
-      </a>
+    <!-- 6. VIDAAI -->
+    <article class="card event-card">
+      <img class="event-image"
+        src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&w=900&q=80"
+        alt="Wedding flowers and heartfelt moments">
+
+      <div class="event-content">
+        <div class="event-icon">🌹</div>
+        <span class="event-tag">Love & New Beginnings</span>
+        <h3>Vidaai</h3>
+        <p class="date">05 December 2026</p>
+        <p><strong>5:00 AM</strong></p>
+        <p>Arambh The Grand Convention,<br>Old Delhi Road, Gurugram</p>
+        <p>A heartfelt farewell filled with love, blessings and new beginnings.</p>
+
+        <a class="btn gold-btn"
+          href="https://maps.app.goo.gl/R9rL2H73HfaHj3d87"
+          target="_blank" rel="noopener">Get Directions ↗</a>
+
+        <div class="music-box">
+          <p>🎵 Emotional Farewell Music</p>
+          <audio controls preload="none">
+            <source src="songs/vidaai.mp3" type="audio/mpeg">
+          </audio>
+        </div>
+      </div>
     </article>
 
   </div>
+
+  <p class="note" style="text-align:center;margin-top:25px">
+    Music tip: Add your chosen MP3 files to the songs folder using the filenames shown above.
+  </p>
 </section>
 
 <section class="section" id="venue">
   <div class="heading">
-    <p class="gold">WE LOOK FORWARD TO WELCOMING YOU</p>
+    <p class="eyebrow">We Look Forward to Welcoming You</p>
     <h2>Venue & Directions</h2>
   </div>
 
   <div class="venue">
+    <div class="ornament">✦ ❀ ✦</div>
     <h3>Arambh The Grand Convention</h3>
     <p>Old Delhi Road, Gurugram, Haryana</p>
     <a class="btn gold-btn"
-       href="https://maps.app.goo.gl/R9rL2H73HfaHj3d87"
-       target="_blank" rel="noopener">
+      href="https://maps.app.goo.gl/R9rL2H73HfaHj3d87"
+      target="_blank" rel="noopener">
       Open Google Maps ↗
     </a>
   </div>
 
   <div class="heading" style="margin-top:35px">
-    <p>For other functions, venue details are listed on their respective cards.</p>
-    <button class="btn" onclick="shareInvite()">Share Invitation ↗</button>
+    <p>For other functions, please check the respective event cards.</p>
+    <button class="btn" onclick="shareInvite()">Share Invitation on WhatsApp 💌</button>
   </div>
 </section>
 
 <footer>
+  <div class="ornament">❀ ✦ ❀</div>
   <h2>Rashi & Vanshaj</h2>
-  <p>Made with love and blessings.</p>
+  <p>Two hearts. One love. A lifetime of happiness.</p>
   <p>॥ शुभ विवाह ॥</p>
 </footer>
 
+<button class="floating-music" onclick="toggleMusic()" id="musicButton">
+  🎵 Play Music
+</button>
+
 <script>
+// Add a chosen music file at songs/wedding-theme.mp3
+const weddingMusic = new Audio("songs/wedding-theme.mp3");
+weddingMusic.loop = true;
+weddingMusic.volume = 0.35;
+
+async function toggleMusic() {
+  const button = document.getElementById("musicButton");
+
+  if (weddingMusic.paused) {
+    try {
+      await weddingMusic.play();
+      button.textContent = "⏸ Pause Music";
+    } catch (error) {
+      button.textContent = "🎵 Tap to Play";
+      alert("Please add songs/wedding-theme.mp3 and try again.");
+    }
+  } else {
+    weddingMusic.pause();
+    button.textContent = "🎵 Play Music";
+  }
+}
+
+// Stop other event tracks when one event's song is played.
+document.querySelectorAll(".music-box audio").forEach(player => {
+  player.addEventListener("play", () => {
+    weddingMusic.pause();
+    document.getElementById("musicButton").textContent = "🎵 Play Music";
+
+    document.querySelectorAll(".music-box audio").forEach(other => {
+      if (other !== player) other.pause();
+    });
+  });
+});
+
 function shareInvite() {
   const message =
-    "You're invited to celebrate the wedding of Rashi Setia & Vanshaj Batra! " +
-    "29 November to 05 December 2026. " +
-    "Reception of Baraat: 04 December, 9 PM onwards. " +
-    "Arambh The Grand Convention, Old Delhi Road, Gurugram. " +
+    "💖 You're invited to celebrate the wedding of Rashi Setia & Vanshaj Batra! 💖\n\n" +
+    "🙏 Path Sukhmani Sahib / Kirtan: 22 November 2026, 9:30 AM\n" +
+    "💍 Engagement / Sagan: 30 November 2026, 6:30 PM\n" +
+    "🌼 Haldi: 03 December 2026, 11:00 AM\n" +
+    "💚 Mehendi / DJ Night: 03 December 2026, 8:00 PM\n" +
+    "👑 Reception of Baraat: 04 December 2026, 9:00 PM\n" +
+    "🌹 Vidaai: 05 December 2026, 5:00 AM\n\n" +
+    "📍 Arambh The Grand Convention, Old Delhi Road, Gurugram\n\n" +
+    "With love and blessings. We look forward to celebrating with you!\n" +
     window.location.href;
 
   window.open(
     "https://wa.me/?text=" + encodeURIComponent(message),
-    "_blank"
+    "_blank",
+    "noopener"
   );
 }
 </script>
