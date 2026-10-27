@@ -235,18 +235,20 @@ footer h2{color:#ffe09a;font-weight:normal}
 #musicDialog p {line-height:1.7}
 #musicDialog button:disabled {opacity:.65;cursor:wait}
 
-/* A focused celebration story with one selected event and one shared player. */
+/* Every celebration is visible in one continuous scroll story. */
 body {padding-bottom:100px}
 #events {scroll-margin-top:110px}
 .event-intro {text-align:center;line-height:1.7;color:#77546a;margin:-12px 0 26px}
 .event-tabs {position:sticky;top:84px;z-index:9;display:flex;gap:10px;overflow:auto;padding:10px 6px;margin-bottom:16px;background:#fff7ef;border-radius:18px;scrollbar-width:thin;box-shadow:0 4px 16px #741b470d}
 .event-tabs button {flex:1 0 auto;border:1px solid #e8cda2;border-radius:999px;padding:12px 18px;background:#fffaf2;color:var(--wine);font:inherit;cursor:pointer;white-space:nowrap}
-.event-tabs button[aria-selected="true"] {background:var(--wine);color:#fff6df;border-color:var(--wine);box-shadow:0 5px 16px #741b4720}
+.event-tabs button[aria-current="true"] {background:var(--wine);color:#fff6df;border-color:var(--wine);box-shadow:0 5px 16px #741b4720}
 .event-tabs button:focus-visible,.btn:focus-visible {outline:3px solid #b18432;outline-offset:4px}
-.event-grid {display:block}
+.event-grid {display:grid;grid-template-columns:1fr;gap:40px}
 #eventStage {scroll-margin-top:170px}
+.event-card {scroll-margin-top:170px}
+#events .event-card.is-current {border-color:var(--gold);box-shadow:0 12px 36px #741b471a}
 .event-card[hidden] {display:none!important}
-#events .event-card {display:grid;grid-template-columns:1fr 1fr;text-align:left;min-height:500px;border-radius:26px;transition:none}
+#events .event-card {display:grid;grid-template-columns:1fr 1fr;text-align:left;min-height:max(500px,calc(100svh - 210px));border-radius:26px;transition:none}
 #events .event-card:hover {transform:none}
 #events .event-image {height:100%;min-height:500px}
 #events .event-content {padding:36px}
@@ -339,20 +341,20 @@ body {padding-bottom:100px}
     <p>Six beautiful moments, one unforgettable celebration. ✨</p>
   </div>
 
-  <p class="event-intro">Six celebrations. Six moods. Choose a moment and let the music follow.</p>
-  <div class="event-tabs" role="tablist" aria-label="Wedding celebrations">
-    <button type="button" role="tab" id="tab-kirtan" aria-controls="event-kirtan" aria-selected="true" tabindex="0" data-event="0">🙏 Kirtan</button>
-    <button type="button" role="tab" id="tab-engagement" aria-controls="event-engagement" aria-selected="false" tabindex="-1" data-event="1">💍 Sagan</button>
-    <button type="button" role="tab" id="tab-haldi" aria-controls="event-haldi" aria-selected="false" tabindex="-1" data-event="2">🌼 Haldi</button>
-    <button type="button" role="tab" id="tab-mehendi" aria-controls="event-mehendi" aria-selected="false" tabindex="-1" data-event="3">💚 Mehendi / DJ</button>
-    <button type="button" role="tab" id="tab-reception" aria-controls="event-reception" aria-selected="false" tabindex="-1" data-event="4">👑 Baraat</button>
-    <button type="button" role="tab" id="tab-vidaai" aria-controls="event-vidaai" aria-selected="false" tabindex="-1" data-event="5">🌹 Vidaai</button>
+  <p class="event-intro">Scroll through our celebrations — the music follows each moment.</p>
+  <div class="event-tabs" role="navigation" aria-label="Wedding celebrations">
+    <button type="button" id="tab-kirtan" aria-controls="event-kirtan" aria-current="true" data-event="0">🙏 Kirtan</button>
+    <button type="button" id="tab-engagement" aria-controls="event-engagement" aria-current="false" data-event="1">💍 Sagan</button>
+    <button type="button" id="tab-haldi" aria-controls="event-haldi" aria-current="false" data-event="2">🌼 Haldi</button>
+    <button type="button" id="tab-mehendi" aria-controls="event-mehendi" aria-current="false" data-event="3">💚 Mehendi / DJ</button>
+    <button type="button" id="tab-reception" aria-controls="event-reception" aria-current="false" data-event="4">👑 Baraat</button>
+    <button type="button" id="tab-vidaai" aria-controls="event-vidaai" aria-current="false" data-event="5">🌹 Vidaai</button>
   </div>
   <div id="eventStage">
   <div class="event-grid">
 
     <!-- KIRTAN -->
-    <article class="card event-card" id="event-kirtan" role="tabpanel" aria-labelledby="tab-kirtan">
+    <article class="card event-card" id="event-kirtan" role="region" aria-labelledby="tab-kirtan">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/kirtan.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Wedding celebration">
@@ -370,7 +372,7 @@ body {padding-bottom:100px}
     </article>
 
     <!-- ENGAGEMENT -->
-    <article class="card event-card" id="event-engagement" role="tabpanel" aria-labelledby="tab-engagement">
+    <article class="card event-card" id="event-engagement" role="region" aria-labelledby="tab-engagement">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/engagement.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Romantic wedding celebration">
@@ -392,7 +394,7 @@ body {padding-bottom:100px}
     </article>
 
     <!-- HALDI -->
-    <article class="card event-card" id="event-haldi" role="tabpanel" aria-labelledby="tab-haldi">
+    <article class="card event-card" id="event-haldi" role="region" aria-labelledby="tab-haldi">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/haldi.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Colourful wedding decorations">
@@ -414,7 +416,7 @@ body {padding-bottom:100px}
     </article>
 
     <!-- MEHENDI -->
-    <article class="card event-card" id="event-mehendi" role="tabpanel" aria-labelledby="tab-mehendi">
+    <article class="card event-card" id="event-mehendi" role="region" aria-labelledby="tab-mehendi">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/mehendi.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Wedding festivities">
@@ -432,7 +434,7 @@ body {padding-bottom:100px}
     </article>
 
     <!-- RECEPTION -->
-    <article class="card event-card" id="event-reception" role="tabpanel" aria-labelledby="tab-reception">
+    <article class="card event-card" id="event-reception" role="region" aria-labelledby="tab-reception">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/reception.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Elegant wedding reception">
@@ -454,7 +456,7 @@ body {padding-bottom:100px}
     </article>
 
     <!-- VIDAAI -->
-    <article class="card event-card" id="event-vidaai" role="tabpanel" aria-labelledby="tab-vidaai">
+    <article class="card event-card" id="event-vidaai" role="region" aria-labelledby="tab-vidaai">
       <img class="event-image"
         src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/vidaai.jpg" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=900&q=80'"
         alt="Wedding flowers and celebration">
@@ -702,9 +704,8 @@ weddingMusic.addEventListener("error", () => {
 });
 function refreshSelectedEvent() {
   tabs.forEach((tab, index) => {
-    tab.setAttribute("aria-selected", String(index === selectedEvent));
-    tab.tabIndex = index === selectedEvent ? 0 : -1;
-    panels[index].hidden = index !== selectedEvent;
+    tab.setAttribute("aria-current", String(index === selectedEvent));
+    panels[index].classList.toggle("is-current", index === selectedEvent);
   });
   document.getElementById("eventCounter").textContent = String(selectedEvent + 1).padStart(2, "0") + " / 06";
   document.getElementById("previousEvent").disabled = selectedEvent === 0;
@@ -712,13 +713,11 @@ function refreshSelectedEvent() {
 }
 function chooseEvent(index, focusTab) {
   if (index < 0 || index >= celebrationTracks.length) return;
-  const changed = index !== selectedEvent || !inEvents;
-  selectedEvent = index;
-  inEvents = true;
-  refreshSelectedEvent();
   if (focusTab) tabs[index].focus();
-  if (enabled && changed) startMusic();
-  stage.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",block:"start"});
+  panels[index].scrollIntoView({
+    behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+    block:"start"
+  });
 }
 tabs.forEach((tab, index) => {
   tab.addEventListener("click", () => chooseEvent(index, false));
@@ -754,15 +753,50 @@ document.addEventListener("visibilitychange", () => {
     startMusic();
   }
 });
-if ("IntersectionObserver" in window) {
-  new IntersectionObserver(entries => {
-    const visible = entries[0].isIntersecting;
-    if (visible === inEvents) return;
-    inEvents = visible;
-    if (enabled) startMusic();
-  }, {rootMargin:"-165px 0px -15% 0px",threshold:0}).observe(stage);
+// Select the card crossing a reading line below the sticky header and navigation.
+// Fixed card geometry means the highlight and song stay stable near boundaries.
+function updateEventFromScroll() {
+  const headerBottom = document.querySelector("header").getBoundingClientRect().bottom;
+  const navigationBottom = document.querySelector(".event-tabs").getBoundingClientRect().bottom;
+  const top = Math.max(0, headerBottom, navigationBottom);
+  const readingLine = top + Math.max(0, window.innerHeight - top) * 0.4;
+  const bounds = panels.map(panel => panel.getBoundingClientRect());
+  const visible = bounds.length > 0 &&
+    bounds[0].top <= readingLine && bounds[bounds.length - 1].bottom > readingLine;
+  let next = selectedEvent;
+  if (visible) {
+    // The space between two cards belongs to the previous celebration.
+    next = 0;
+    bounds.forEach((rect, index) => {
+      if (rect.top <= readingLine) next = index;
+    });
+  }
+  const changed = visible !== inEvents || (visible && next !== selectedEvent);
+  inEvents = visible;
+  if (visible && next !== selectedEvent) {
+    selectedEvent = next;
+    refreshSelectedEvent();
+    // Keep the current shortcut visible on narrow screens without moving the page.
+    const shortcut = tabs[next];
+    const nav = shortcut.parentElement;
+    nav.scrollLeft = shortcut.offsetLeft - nav.offsetLeft - (nav.clientWidth - shortcut.offsetWidth) / 2;
+  }
+  if (changed && enabled) startMusic();
 }
+let scrollFrame = false;
+function scheduleScrollUpdate() {
+  if (scrollFrame) return;
+  scrollFrame = true;
+  window.requestAnimationFrame(() => {
+    scrollFrame = false;
+    updateEventFromScroll();
+  });
+}
+window.addEventListener("scroll", scheduleScrollUpdate, {passive:true});
+window.addEventListener("resize", scheduleScrollUpdate);
+window.addEventListener("load", scheduleScrollUpdate);
 refreshSelectedEvent();
+updateEventFromScroll();
 setStatus("paused");
 startMusic().then(ok => {
   if (!ok && !enabled && !musicDialog.open) musicDialog.showModal();
