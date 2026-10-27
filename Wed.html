@@ -314,7 +314,7 @@ footer h2{color:#ffe09a;font-weight:normal}
         <div class="music-box">
           <p>🎵 Devotional Music</p>
           <audio controls preload="none" class="event-audio">
-            <source src="songs/kirtan.mp3" type="audio/mpeg">
+            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/kirtan.mp3" type="audio/mpeg">
           </audio>
         </div>
       </div>
@@ -341,7 +341,7 @@ footer h2{color:#ffe09a;font-weight:normal}
         <div class="music-box">
           <p>🎵 Romantic Music</p>
           <audio controls preload="none" class="event-audio">
-            <source src="songs/engagement.mp3" type="audio/mpeg">
+            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/engagement.mp3" type="audio/mpeg">
           </audio>
         </div>
       </div>
@@ -368,7 +368,7 @@ footer h2{color:#ffe09a;font-weight:normal}
         <div class="music-box">
           <p>🎵 Haldi Celebration Music</p>
           <audio controls preload="none" class="event-audio">
-            <source src="songs/haldi.mp3" type="audio/mpeg">
+            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/haldi.mp3" type="audio/mpeg">
           </audio>
         </div>
       </div>
@@ -391,7 +391,7 @@ footer h2{color:#ffe09a;font-weight:normal}
         <div class="music-box">
           <p>🎵 Mehendi / DJ Music</p>
           <audio controls preload="none" class="event-audio">
-            <source src="songs/mehendi.mp3" type="audio/mpeg">
+            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/mehendi.mp3" type="audio/mpeg">
           </audio>
         </div>
       </div>
@@ -418,7 +418,7 @@ footer h2{color:#ffe09a;font-weight:normal}
         <div class="music-box">
           <p>🎵 Grand Entry Music</p>
           <audio controls preload="none" class="event-audio">
-            <source src="songs/reception.mp3" type="audio/mpeg">
+            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/reception.mp3" type="audio/mpeg">
           </audio>
         </div>
       </div>
@@ -445,7 +445,7 @@ footer h2{color:#ffe09a;font-weight:normal}
         <div class="music-box">
           <p>🎵 Emotional Farewell Music</p>
           <audio controls preload="none" class="event-audio">
-            <source src="songs/vidaai.mp3" type="audio/mpeg">
+            <source src="https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/vidaai.mp3" type="audio/mpeg">
           </audio>
         </div>
       </div>
@@ -560,7 +560,7 @@ footer h2{color:#ffe09a;font-weight:normal}
 </button>
 
 <script>
-const weddingMusic = new Audio("songs/wedding-theme.mp3");
+const weddingMusic = new Audio("https://raw.githubusercontent.com/annikumar1237/Wedding_Card/main/wedding-theme.mp3");
 weddingMusic.loop = true;
 weddingMusic.volume = 0.35;
 
@@ -572,7 +572,7 @@ async function toggleMusic() {
       await weddingMusic.play();
       button.textContent = "⏸ Pause Music";
     } catch (error) {
-      alert("Please add songs/wedding-theme.mp3 to your website folder.");
+      alert("Check that wedding-theme.mp3 is uploaded to the main folder of your GitHub repository.");
     }
   } else {
     weddingMusic.pause();
