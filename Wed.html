@@ -220,73 +220,6 @@ footer h2{color:#ffe09a;font-weight:normal}
   .event-image{height:235px}
   header a{margin:5px;font-size:12px}
 }
-
-/* Welcome music popup */
-.music-welcome {
-  position: fixed;
-  inset: 0;
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  background: linear-gradient(135deg, rgba(35, 7, 25, .94), rgba(87, 18, 57, .94));
-  backdrop-filter: blur(7px);
-}
-.music-welcome.is-hidden { display: none; }
-.music-welcome-card {
-  width: min(480px, 100%);
-  padding: 34px 25px 26px;
-  text-align: center;
-  color: #fff9f1;
-  background: linear-gradient(145deg, #741b47, #42112f);
-  border: 2px solid #d9ad46;
-  border-radius: 24px;
-  box-shadow: 0 20px 70px rgba(0,0,0,.38);
-}
-.welcome-ornament { color: #ffe09a; font-size: 26px; letter-spacing: 5px; }
-.welcome-eyebrow {
-  margin: 16px 0 8px;
-  color: #ffe09a;
-  letter-spacing: 3px;
-  font-size: 11px;
-  text-transform: uppercase;
-}
-.music-welcome-card h2 {
-  margin: 8px 0 14px;
-  font-size: clamp(36px, 9vw, 54px);
-  font-weight: normal;
-  line-height: 1.1;
-}
-.music-welcome-card h2 span { color: #ffe09a; font-style: italic; }
-.welcome-message { line-height: 1.7; margin: 0 auto; max-width: 340px; }
-.welcome-divider { margin: 20px 0; color: #ffe09a; letter-spacing: 3px; }
-.welcome-question { margin: 0 0 18px; font-size: 15px; }
-.welcome-allow, .welcome-skip {
-  display: block;
-  width: 100%;
-  border-radius: 30px;
-  padding: 14px 18px;
-  margin: 10px 0 0;
-  font: inherit;
-  cursor: pointer;
-  transition: transform .2s ease, opacity .2s ease;
-}
-.welcome-allow {
-  border: 1px solid #ffe09a;
-  background: linear-gradient(135deg, #f3d58a, #d9ad46);
-  color: #42112f;
-  font-weight: bold;
-}
-.welcome-skip {
-  border: 1px solid rgba(255,255,255,.55);
-  background: transparent;
-  color: #fff9f1;
-}
-.welcome-allow:hover, .welcome-skip:hover { transform: translateY(-1px); }
-.welcome-note { margin: 17px 0 0; color: #f2dce7; font-size: 11px; line-height: 1.5; }
-body.music-popup-open { overflow: hidden; }
-
 </style>
 </head>
 
@@ -619,32 +552,6 @@ body.music-popup-open { overflow: hidden; }
   </div>
 </section>
 
-
-<!-- WEDDING MUSIC WELCOME / PERMISSION POPUP -->
-<div id="musicWelcome" class="music-welcome" role="dialog" aria-modal="true"
-     aria-labelledby="musicWelcomeTitle">
-  <div class="music-welcome-card">
-    <div class="welcome-ornament">❦ ✦ ❦</div>
-    <p class="welcome-eyebrow">A Celebration of Love</p>
-    <h2 id="musicWelcomeTitle">Rashi <span>&amp;</span> Vanshaj</h2>
-    <p class="welcome-message">
-      You are warmly invited to celebrate their beautiful beginning.
-    </p>
-    <div class="welcome-divider">✧ ───── ✧</div>
-    <p class="welcome-question">Would you like to play the wedding music?</p>
-    <button type="button" class="welcome-allow" onclick="allowWeddingMusic()">
-      🎵 Allow Music &amp; Open Invitation
-    </button>
-    <button type="button" class="welcome-skip" onclick="openInvitationWithoutMusic()">
-      Open Without Music
-    </button>
-    <p class="welcome-note">
-      Tap “Allow Music” to start the wedding theme. Your browser may show its own
-      permission prompt depending on its settings.
-    </p>
-  </div>
-</div>
-
 <!-- MUSIC CONTROL -->
 <button class="floating-music"
   onclick="toggleMusic()"
@@ -657,40 +564,21 @@ const weddingMusic = new Audio("https://raw.githubusercontent.com/annikumar1237/
 weddingMusic.loop = true;
 weddingMusic.volume = 0.35;
 
-// Keep the invitation behind the welcome popup until the visitor chooses.
-document.body.classList.add("music-popup-open");
-
-function closeMusicWelcome() {
-  const popup = document.getElementById("musicWelcome");
-  if (popup) popup.classList.add("is-hidden");
-  document.body.classList.remove("music-popup-open");
-}
-
-async function allowWeddingMusic() {
+// Try to start the wedding theme as soon as the page opens.
+// Browsers may block autoplay with sound until the visitor interacts.
+window.addEventListener("load", async () => {
   const button = document.getElementById("musicButton");
   try {
-    // Calling play() directly from this click makes playback much more reliable.
     await weddingMusic.play();
-    if (button) button.textContent = "⏸ Pause Music";
-    closeMusicWelcome();
+    button.textContent = "⏸ Pause Music";
   } catch (error) {
-    // If the audio file fails or playback is blocked, still open the invitation.
-    closeMusicWelcome();
-    if (button) button.textContent = "🎵 Tap to Play Music";
-    alert("Invitation is opening, but music could not start. Please check that wedding-theme.mp3 is uploaded to your GitHub repository and try the music button.");
+    button.textContent = "🎵 Tap to Play Music";
   }
-}
-
-function openInvitationWithoutMusic() {
-  closeMusicWelcome();
-}
-
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") openInvitationWithoutMusic();
 });
 
 async function toggleMusic() {
   const button = document.getElementById("musicButton");
+
   if (weddingMusic.paused) {
     try {
       await weddingMusic.play();
