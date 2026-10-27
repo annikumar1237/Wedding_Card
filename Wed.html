@@ -564,6 +564,18 @@ const weddingMusic = new Audio("https://raw.githubusercontent.com/annikumar1237/
 weddingMusic.loop = true;
 weddingMusic.volume = 0.35;
 
+// Try to start the wedding theme as soon as the page opens.
+// Browsers may block autoplay with sound until the visitor interacts.
+window.addEventListener("load", async () => {
+  const button = document.getElementById("musicButton");
+  try {
+    await weddingMusic.play();
+    button.textContent = "⏸ Pause Music";
+  } catch (error) {
+    button.textContent = "🎵 Tap to Play Music";
+  }
+});
+
 async function toggleMusic() {
   const button = document.getElementById("musicButton");
 
@@ -572,7 +584,7 @@ async function toggleMusic() {
       await weddingMusic.play();
       button.textContent = "⏸ Pause Music";
     } catch (error) {
-      alert("Check that wedding-theme.mp3 is uploaded to the main folder of your GitHub repository.");
+      button.textContent = "🎵 Tap to Play Music";
     }
   } else {
     weddingMusic.pause();
