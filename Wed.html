@@ -284,6 +284,15 @@ body {padding-bottom:100px}
 }
 @media(prefers-reduced-motion:reduce) {html {scroll-behavior:auto}}
 
+
+#eventViewer{width:100vw;max-width:none;height:100dvh;max-height:none;margin:0;padding:60px 20px 24px;border:0;background:var(--cream);color:var(--ink);overflow:auto;box-sizing:border-box}
+#eventViewer::backdrop{background:#392238}
+#eventViewer .event-card{max-width:1000px;margin:auto}
+#eventViewer .event-image{height:45vh;object-fit:contain;background:#f5d9e7}
+#eventViewer .event-content{max-width:700px;margin:auto}
+#closeEvent{position:fixed;right:16px;top:10px;z-index:2}
+#eventViewer .viewer-nav{text-align:center}
+.event-card{cursor:pointer}
 </style>
 </head>
 
@@ -569,6 +578,7 @@ body {padding-bottom:100px}
       <a class="btn gold-btn" href="tel:8929120750">📞 Call</a>
       <a class="btn" href="https://wa.me/918929120750?text=Namaste%20Ishank%20Ji!%20Rashi%20aur%20Vanshaj%20ki%20shaadi%20ke%20liye%20bahut%20bahut%20badhai.%20%F0%9F%92%90">WhatsApp RSVP</a>
     </div>
+    <div class="card rsvp-card"><div class="event-icon">💐</div><h3>Rahul And Garima</h3><p>With Love &amp; Best Wishes</p></div>
   </div>
 
   <div class="card" style="margin-top:25px">
@@ -578,7 +588,7 @@ body {padding-bottom:100px}
       Setia Family · Sindhu Family · Arora Family
     </p>
     <p>
-      Gulyani Family · Wadhwa Family · Sahil Family
+      Gulyani Family · Wadhwa Family · Satija Family
     </p>
     <p>
       We look forward to celebrating this beautiful occasion with you!
@@ -597,6 +607,7 @@ body {padding-bottom:100px}
   <button type="button" class="btn" id="skipMusic">Continue Without Music</button>
 </dialog>
 
+<dialog id="eventViewer" aria-label="Celebration details"><button class="btn" id="closeEvent" type="button">Close ✕</button><div id="viewerContent"></div><div class="viewer-nav"><button class="btn" id="viewerPrevious">← Previous</button><button class="btn gold-btn" id="viewerNext">Next →</button></div></dialog>
 <!-- MUSIC CONTROL -->
 <button type="button" class="floating-music" onclick="toggleMusic()" id="musicButton" aria-pressed="false">🎵 Play Music</button>
 
@@ -613,7 +624,7 @@ const celebrationTracks = [
 ];
 const weddingMusic = new Audio(defaultTrack.src);
 weddingMusic.loop = true;
-weddingMusic.preload = "metadata";
+weddingMusic.preload = "auto";
 weddingMusic.volume = 0.5;
 const musicButton = document.getElementById("musicButton");
 const musicDialog = document.getElementById("musicDialog");
@@ -659,27 +670,18 @@ async function startMusic() {
   enabled = true;
   const version = ++requestVersion;
   syncSource();
-  if (document.hidden) {
-    weddingMusic.pause();
-    return true;
-  }
   if (!weddingMusic.paused && playbackState === "playing") {
     setStatus("playing");
     return true;
   }
   setStatus("loading", "Loading background music…");
   clearTimeout(loadTimer);
-  loadTimer = setTimeout(() => {
-    if (version === requestVersion && enabled && playbackState === "loading") {
-      pauseMusic();
-      setStatus("error", "Music is taking too long to load. Check your connection and tap Play to retry.");
-    }
-  }, 20000);
+
   try {
     // Calling play before any await preserves the visitor's click permission.
     await weddingMusic.play();
     if (version !== requestVersion) return true;
-    if (!enabled || document.hidden) {
+    if (!enabled) {
       weddingMusic.pause();
       return true;
     }
@@ -716,11 +718,7 @@ function refreshSelectedEvent() {
 }
 function chooseEvent(index, focusTab) {
   if (index < 0 || index >= celebrationTracks.length) return;
-  if (focusTab) tabs[index].focus();
-  panels[index].scrollIntoView({
-    behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
-    block:"start"
-  });
+  openEvent(index);
 }
 tabs.forEach((tab, index) => {
   tab.addEventListener("click", () => chooseEvent(index, false));
@@ -748,17 +746,15 @@ document.getElementById("skipMusic").addEventListener("click", () => {
 musicDialog.addEventListener("cancel", () => pauseMusic());
 musicDialog.addEventListener("close", () => musicButton.focus());
 document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-    requestVersion++;
-    clearTimeout(loadTimer);
-    weddingMusic.pause();
-  } else if (enabled) {
-    startMusic();
-  }
+  if (!document.hidden && enabled && weddingMusic.paused) startMusic();
+});
+weddingMusic.addEventListener("ended", () => {
+  if (enabled) { weddingMusic.currentTime = 0; startMusic(); }
 });
 // Select the card crossing a reading line below the sticky header and navigation.
 // Fixed card geometry means the highlight and song stay stable near boundaries.
 function updateEventFromScroll() {
+  if (document.getElementById("eventViewer").open) return;
   const headerBottom = document.querySelector("header").getBoundingClientRect().bottom;
   const navigationBottom = document.querySelector(".event-tabs").getBoundingClientRect().bottom;
   const top = Math.max(0, headerBottom, navigationBottom);
@@ -798,6 +794,47 @@ function scheduleScrollUpdate() {
 window.addEventListener("scroll", scheduleScrollUpdate, {passive:true});
 window.addEventListener("resize", scheduleScrollUpdate);
 window.addEventListener("load", scheduleScrollUpdate);
+const viewer = document.getElementById("eventViewer");
+let eventOpener;
+function openEvent(index) {
+  if (!viewer.open) eventOpener = document.activeElement;
+  selectedEvent = index;
+  inEvents = true;
+  refreshSelectedEvent();
+  const copy = panels[index].cloneNode(true);
+  copy.removeAttribute("id");
+  copy.removeAttribute("aria-labelledby");
+  document.getElementById("viewerContent").replaceChildren(copy);
+  document.getElementById("viewerPrevious").disabled = index === 0;
+  document.getElementById("viewerNext").disabled = index === panels.length - 1;
+  if (!viewer.open) {
+    viewer.showModal();
+    document.body.style.overflow = "hidden";
+    if (viewer.requestFullscreen) viewer.requestFullscreen().catch(() => {});
+  }
+  viewer.scrollTop = 0;
+  if (enabled) startMusic();
+}
+document.getElementById("closeEvent").onclick = () => viewer.close();
+viewer.addEventListener("close", () => {
+  document.body.style.overflow = "";
+  if (document.fullscreenElement === viewer) document.exitFullscreen().catch(() => {});
+  if (eventOpener) eventOpener.focus();
+  updateEventFromScroll();
+});
+document.getElementById("viewerPrevious").onclick = () => openEvent(selectedEvent - 1);
+document.getElementById("viewerNext").onclick = () => openEvent(selectedEvent + 1);
+panels.forEach((panel, index) => {
+  const button = document.createElement("button");
+  button.className = "btn";
+  button.textContent = "View Full Screen ⛶";
+  button.type = "button";
+  panel.querySelector(".event-content").append(button);
+  panel.addEventListener("click", event => {
+    if (event.target.closest("a")) return;
+    openEvent(index);
+  });
+});
 refreshSelectedEvent();
 updateEventFromScroll();
 setStatus("paused");
